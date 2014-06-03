@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
+var usercontroller = express.Router();
 
 /* GET user list page */
-router.get('/userlist',function(req, res){
+usercontroller.get('/userlist',function(req, res){
 	var db = req.db;
 	var collection = db.get('usercollection');
 	collection.find({},{},function(e,docs){
@@ -13,7 +13,7 @@ router.get('/userlist',function(req, res){
 });
 
 /* GET new user page */
-router.get('/newuser',function(req, res){
+usercontroller.get('/newuser',function(req, res){
 	var db = req.db;
 	var collection = db.get('usercollection');
 	collection.find({},{},function(err,docs){
@@ -25,7 +25,7 @@ router.get('/newuser',function(req, res){
 });
 
 /* POST add user page */
-router.post('/adduser',function(req, res){
+usercontroller.post('/adduser',function(req, res){
 	var db = req.db;
 	
 	// Get our form values. These rely on the "name" attributes
@@ -39,20 +39,10 @@ router.post('/adduser',function(req, res){
 			// If it failed, return error
             res.send("There was a problem adding the information to the database.");
 		} else {
-			collection.find({},{},function(err,docs){
-				res.render('newuser', {
-					"userlist" : docs,
-					title: 'Add a new user'
-				});
-			});
+			res.location("newuser");
+			res.redirect("newuser");
 		}
 	});
 });
 
-/* GET users listing. */
-router.get('/', function(req, res) {
-  res.send('respond with a resource');
-});
-
-
-module.exports = router;
+module.exports = usercontroller;

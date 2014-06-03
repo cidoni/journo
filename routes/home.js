@@ -1,15 +1,15 @@
 var express = require('express');
-var router = express.Router();
+var homecontroller = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
+homecontroller.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
 /* GET test page. */
-router.get('/test', function(req, res) {
+homecontroller.get('/test', function(req, res) {
   res.render('test', { title: 'Test Page' });
 });
 
 
-module.exports = router;
+module.exports = homecontroller;
